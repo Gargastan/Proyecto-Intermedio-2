@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
         AudioManager.Instance.StopSound("Menu Music");
         AudioManager.isMusicLoop = false;
         fade.FadeIn();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(fade.fadeTime);
         SceneManager.LoadScene("Game Scene");
     }//Inicia el juego con efectos de fade.
 
@@ -44,11 +44,5 @@ public class MainMenu : MonoBehaviour
 #endif
     }//Cierra el juego.
 
-    private void Update()
-    {
-        if (!AudioManager.Instance._musicSource.isPlaying && AudioManager.isMusicLoop)
-        {
-            AudioManager.Instance.PlayMusic(menuMusic);
-        }
-    }
+
 }
