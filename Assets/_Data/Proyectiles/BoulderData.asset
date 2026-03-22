@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3be65d1ccccbc1418a530bd9b0c1a99, type: 3}
+  m_Name: BoulderData
+  m_EditorClassIdentifier: Assembly-CSharp::ProyectileData
+  proyectileName: Boulder
+  icon: {fileID: 21300000, guid: 64162da1fe147484e9bdbd7ffb026576, type: 3}
+  hitSFX: {fileID: 0}
+  deathSFX: {fileID: 8300000, guid: 4a863e74e258f8b4ea273754beb8309d, type: 3}
+  cost: 10
+  speed: 1800
+  speedAcceleration: 0
+  angularSpeed: 5
+  angularAcceleration: 0
+  weight: 5
+  weightIncrement: 0
+  weightIncrementTimer: 0
+  fallTimer: 3
+  prefab: {fileID: 1757970450495823351, guid: c701700adc226c94ab9ef43fe4643d6c, type: 3}

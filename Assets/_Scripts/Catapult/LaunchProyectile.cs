@@ -9,7 +9,7 @@ public class LaunchProyectile : MonoBehaviour
     GameObject proyectile,proyectileOrigin,catapultArmRotationAxis;
 
     private bool canLaunch = false;
-    private bool canThrowArm = true;
+    public static bool canThrowArm = true;
 
     public static event Action <GameObject> onProyectileLaunched;
    
@@ -28,9 +28,10 @@ public class LaunchProyectile : MonoBehaviour
         canLaunch = false;
         GameObject newProjectile = Instantiate(proyectile, proyectileOrigin.transform.position, proyectileOrigin.transform.rotation);
         Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
+        ProyectileBehaviour behaviour = newProjectile.GetComponent<ProyectileBehaviour>();
+        ProyectileData data = behaviour.proyectileData;
 
-        rb.gravityScale = 1;
-        rb.AddForce(proyectileOrigin.transform.up * 1800);
+        rb.AddForce(proyectileOrigin.transform.up * data.speed);
         onProyectileLaunched?.Invoke(newProjectile);
 
     }
@@ -62,8 +63,6 @@ public class LaunchProyectile : MonoBehaviour
         }
 
         obj.rotation = startRotation;
-        yield return new WaitForSeconds(0.5f);
-        canThrowArm = true;
 
     }
 

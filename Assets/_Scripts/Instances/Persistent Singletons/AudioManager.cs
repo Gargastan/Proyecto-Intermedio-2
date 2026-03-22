@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : PersistentSingleton<AudioManager>
 {
     public AudioSource _musicSource, _effectSource;
     public static bool isMusicLoop, isLoopActive;
@@ -35,7 +35,7 @@ public class AudioManager : Singleton<AudioManager>
         }
     }// Stops every sound found inside "audioSources" dictionary
 
-    public void PlayEffect(AudioClip clip, Vector3 soundPosition, float volume = 1.0f, bool stop = false, float minPitch = 1f, float manPitch = 1f)
+    public void PlayEffect(AudioClip clip, Vector3 soundPosition = default, float volume = 1.0f, bool stop = false, float minPitch = 1f, float manPitch = 1f)
     {
         if (clip != null)
         {
@@ -54,7 +54,9 @@ public class AudioManager : Singleton<AudioManager>
 
             // Get the AudioSource from the dictionary
             AudioSource source = audioSources[soundName];
+
             source.volume = volume;
+
             source.pitch = Random.Range(minPitch, manPitch);
 
             if (stop)
