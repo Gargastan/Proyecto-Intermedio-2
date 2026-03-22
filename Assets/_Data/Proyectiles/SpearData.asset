@@ -17,12 +17,12 @@ MonoBehaviour:
   hitSFX: {fileID: 0}
   deathSFX: {fileID: 0}
   cost: 5
-  speed: 3000
+  speed: 2500
   speedAcceleration: 0
-  angularSpeed: 0
+  angularSpeed: 40
   angularAcceleration: 0
   weight: 5
-  weightIncrement: 0
+  weightIncrement: 1000
   weightIncrementTimer: 0
   centerOfMass: {x: 0, y: 1.2}
   fallTimer: 0
