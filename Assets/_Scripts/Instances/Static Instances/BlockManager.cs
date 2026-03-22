@@ -8,14 +8,14 @@ public class BlockManager : MonoBehaviour
     private protected Dictionary<int, GameObject> blockDatabase = new Dictionary< int, GameObject>();
 
     private protected GameObject currentHandledBlock;
-    private protected BlockBehaviours currentHandledBlockBehaviours;
+    private protected BlockBehavioursAux currentHandledBlockBehaviours;
 
     private void Setup()
     {
         foreach (var block in blockDatabase.Values)
         {
             currentHandledBlock = block;
-            currentHandledBlockBehaviours = currentHandledBlock.GetComponent<BlockBehaviours>();
+            currentHandledBlockBehaviours = currentHandledBlock.GetComponent<BlockBehavioursAux>();
 
             currentHandledBlockBehaviours._onBlockStateChange += UpdateBlockState;
         }
@@ -30,7 +30,7 @@ public class BlockManager : MonoBehaviour
     private void DestroyBlock(int index)
     {
         currentHandledBlock = blockDatabase[index];
-        currentHandledBlockBehaviours = currentHandledBlock.GetComponent<BlockBehaviours>();
+        currentHandledBlockBehaviours = currentHandledBlock.GetComponent<BlockBehavioursAux>();
 
         currentHandledBlockBehaviours.Despawn();
         blockDatabase.Remove(index);

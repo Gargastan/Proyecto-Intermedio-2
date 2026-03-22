@@ -1,13 +1,23 @@
-using System;
 using UnityEngine;
 
-public class BlockBehaviours : MonoBehaviour
+public class BlockBehaviour : MonoBehaviour
 {
-    public event Action _onBlockStateChange;
+    public BlockData data;
 
-    public BlockData blockData;
-    public void Despawn()
+    private float currentHealth;
+
+    void Start()
     {
+        currentHealth = data.resistance;
+    }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
