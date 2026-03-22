@@ -25,7 +25,6 @@ public class ProyectileBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         Destroy(rb.gameObject);
-        LaunchProyectile.canLaunch = true;
     }
 
     private IEnumerator Fall(float timer)
@@ -36,6 +35,6 @@ public class ProyectileBehaviour : MonoBehaviour
 
     void Update()
     {
-        if(canFall) rb.linearVelocityY -= 0.1f;
+        if(canFall) rb.linearVelocityY -= 0.05f;
     }
 }
