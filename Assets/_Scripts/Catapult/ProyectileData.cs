@@ -6,6 +6,7 @@ public class ProyectileData : ScriptableObject
     public string proyectileName;
     public Sprite icon;
     public AudioClip hitSFX, deathSFX;
+    public float SFXVolume;
 
     [Header("Stats")]
     public int cost;
@@ -26,6 +27,9 @@ public class ProyectileData : ScriptableObject
 
     [Space]
     public float fallTimer;
+
+    [Space]
+    public float liveTime;
 
     [Header("Visual")]
     public GameObject prefab;

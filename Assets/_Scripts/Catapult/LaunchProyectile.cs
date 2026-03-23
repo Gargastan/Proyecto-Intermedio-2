@@ -8,6 +8,12 @@ public class LaunchProyectile : MonoBehaviour
     [SerializeField]
     GameObject proyectile,proyectileOrigin,catapultArmRotationAxis;
 
+    [SerializeField]
+    private AudioClip swingSFX;
+
+    [SerializeField]
+    public AudioClip flySFX;
+
     private bool canLaunch = false;
     public static bool canThrowArm = true;
 
@@ -25,6 +31,8 @@ public class LaunchProyectile : MonoBehaviour
         }
 
         if (!canLaunch) return;
+        AudioManager.Instance.PlayEffect(swingSFX,transform.position,1,false,0.9f,1.1f);
+        AudioManager.Instance.PlayEffect(flySFX,transform.position,0.3f,false,0.9f,1.1f);
         canLaunch = false;
         GameObject newProjectile = Instantiate(proyectile, proyectileOrigin.transform.position, proyectileOrigin.transform.rotation);
         Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();

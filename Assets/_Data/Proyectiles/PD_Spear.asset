@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3be65d1ccccbc1418a530bd9b0c1a99, type: 3}
-  m_Name: SpearData
+  m_Name: PD_Spear
   m_EditorClassIdentifier: Assembly-CSharp::ProyectileData
   proyectileName: Spear
   icon: {fileID: 6108012597462862368, guid: 02062aa1c0666a54da08f67ad7b7f689, type: 3}
-  hitSFX: {fileID: 0}
+  hitSFX: {fileID: 8300000, guid: 3c1afd42190f980429bb16b01c4e5b91, type: 3}
   deathSFX: {fileID: 0}
+  SFXVolume: 6
   cost: 5
   speed: 2500
   speedAcceleration: 0
@@ -25,5 +26,6 @@ MonoBehaviour:
   weightIncrement: 1000
   weightIncrementTimer: 0
   centerOfMass: {x: 0, y: 1.2}
-  fallTimer: 0
+  fallTimer: 0.5
+  liveTime: 1
   prefab: {fileID: 5890255570257587788, guid: 489b466965110ba47ab79d5ef93c5da5, type: 3}

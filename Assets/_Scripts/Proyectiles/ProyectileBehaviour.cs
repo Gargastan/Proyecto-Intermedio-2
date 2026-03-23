@@ -7,6 +7,7 @@ public class ProyectileBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     private bool canFall = false;
     private bool isTouching = false;
+    private bool canSound = true;
     //private bool isDiving = false;
 
     public ProyectileData proyectileData;
@@ -25,11 +26,25 @@ public class ProyectileBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (canSound)
+        {
+            canSound = false;
+            AudioManager.Instance.PlayEffect(proyectileData.hitSFX, rb.transform.position, proyectileData.SFXVolume, false, minPitch: 0.9f, 1.1f);
+            LaunchProyectile lp = FindAnyObjectByType<LaunchProyectile>();
+            AudioManager.Instance.StopSound(lp.flySFX.name);
+        }
+
+        collision.gameObject.TryGetComponent<BlockBehaviour>(out BlockBehaviour blockBehaviour);
+        if (blockBehaviour != null)
+        {
+            if(blockBehaviour.data.name == "BD_Cake") Destroy(blockBehaviour.gameObject);
+        }
+        
         isTouching = true;
         rb.mass += proyectileData.weightIncrement;
         rb.linearDamping += proyectileData.weightIncrement;
         rb.angularDamping += proyectileData.weightIncrement;
-        StartCoroutine(Death(5f));
+        StartCoroutine(Death(proyectileData.liveTime));
     }
     private void OnCollisionExit(Collision collision)
     {

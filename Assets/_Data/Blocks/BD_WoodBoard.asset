@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2966f266ab0e4498c1322a7c7f5252, type: 3}
+  m_Name: BD_WoodBoard
+  m_EditorClassIdentifier: Assembly-CSharp::BlockData
+  blockName: Wood Board
+  icon: {fileID: 4727633781103762509, guid: 419f2e6d4490b624584f866c3f565089, type: 3}
+  cost: 15
+  resistance: 1
+  weight: 20
+  canPlaceOnTop: 1
+  prefab: {fileID: 4086795691184719355, guid: a14ccce415a5a324d85ad79f8ae1d3da, type: 3}

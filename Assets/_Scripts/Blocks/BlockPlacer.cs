@@ -50,6 +50,8 @@ public class BlockPlacer : MonoBehaviour
             previewObject = Instantiate(currentBlock.prefab);
             Destroy(previewObject.GetComponent<Rigidbody2D>());
             Destroy(previewObject.GetComponent<Collider2D>());
+            Collider2D[] c2 = previewObject.GetComponentsInChildren<Collider2D>();
+            for (int i = 0; i < c2.Length; i++) Destroy(c2[i]);
             SetPreviewTransparency(previewObject, 0.5f);
         }
 
