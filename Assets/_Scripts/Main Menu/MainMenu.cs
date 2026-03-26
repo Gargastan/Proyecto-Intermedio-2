@@ -19,17 +19,18 @@ public class MainMenu : MonoBehaviour
         fade = Object.FindAnyObjectByType<ScreenFade>();
     }
 
-    public void StartGame()
+    public void StartGame(int gameStartState)
     {
-        StartCoroutine(_StartGame());
+        StartCoroutine(_StartGame(gameStartState));
     }
 
-    public IEnumerator _StartGame()
+    public IEnumerator _StartGame(int gameStartState)
     {
         fade.FadeIn();
         yield return new WaitForSeconds(fade.fadeTime);
         AudioManager.Instance.StopSound(menuMusicName);
         AudioManager.Instance.PlayMusic(gameMusic, 0.4f);
+        GameManager.Instance.gameStartState = gameStartState;
         SceneManager.LoadScene("Game Scene");
     }
 
