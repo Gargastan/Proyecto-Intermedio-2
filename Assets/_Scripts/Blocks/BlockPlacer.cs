@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class BlockPlacer : MonoBehaviour
 {
+    public bool isEnabledForPlayer = true;
+
     [Header("References")]
     public Camera cam;
     public GridSystem grid;
-
     public BlockData currentBlock;
     public BuildTimer buildTimer;
 
@@ -13,7 +14,7 @@ public class BlockPlacer : MonoBehaviour
     public LayerMask placementLayer;
     public Vector2 checkSize = new Vector2(0.9f, 0.1f);
     public float checkDistance = 0.6f;
-
+    
     #region Preview
     private GameObject previewObject;
     private float previewRotation = 0f;
@@ -21,6 +22,8 @@ public class BlockPlacer : MonoBehaviour
 
     void Update()
     {
+        if (!isEnabledForPlayer) return;
+
         HandleRotation();
         HandlePreview();
         HandlePlacement();
@@ -95,33 +98,17 @@ public class BlockPlacer : MonoBehaviour
             }
 
             Vector3 pos = previewObject.transform.position;
-
-            int cost = currentBlock.cost;
-
-            if (CurrencyManager.Instance.CanAfford(cost))
+            bool placed = BuildSystem.Instance.TryPlaceBlock(currentBlock, pos, previewObject.transform.rotation);
+            
+            if (placed)
             {
                 SetPreviewTransparency(previewObject, 1f);
-                GameObject placed = Instantiate(currentBlock.prefab, pos, previewObject.transform.rotation);
-                SpriteRenderer sr = placed.GetComponent<SpriteRenderer>();
-                if (sr != null)
-                {
-                    sr.color = Color.white;
-                }
-                placed.layer = LayerMask.NameToLayer("Placement");
-                CurrencyManager.Instance.Spend(cost);
             }
             else
             {
                 Debug.Log("No hay dinero");
             }
         }
-    }
-
-    bool CanPlaceBlock(Vector2 position)
-    {
-        Vector2 checkPos = position + Vector2.down * checkDistance;
-        Collider2D hit = Physics2D.OverlapBox(checkPos, checkSize, 0f, placementLayer);
-        return hit != null;
     }
 
     void SetPreviewTransparency(GameObject obj, float alpha)

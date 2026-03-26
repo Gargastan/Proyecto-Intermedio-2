@@ -1,16 +1,19 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AIBuilder : MonoBehaviour
 {
     public BlockPlacer placer;
     public Transform cake;
+    public AIPatternData patternData;
+
+    public float baseDelay = 0.8f;
+    public float spacing = 0.5f;
 
     private AIDifficulty difficulty;
     private Collider2D cakeCollider;
-
-    public float baseDelay = 0.4f;
-    public float spacing = 0.5f;
+    private Coroutine buildRoutine;
 
     public void SetDifficulty(AIDifficulty diff)
     {
@@ -20,7 +23,16 @@ public class AIBuilder : MonoBehaviour
     void OnEnable()
     {
         cakeCollider = cake.GetComponent<Collider2D>();
-        StartCoroutine(BuildRoutine());
+        buildRoutine = StartCoroutine(BuildRoutine());
+    }
+
+    void OnDisable()
+    {
+        if (buildRoutine != null)
+        {
+            StopCoroutine(buildRoutine);
+            buildRoutine = null;
+        }
     }
 
     IEnumerator BuildRoutine()
@@ -29,13 +41,16 @@ public class AIBuilder : MonoBehaviour
 
         float delay = GetDelay();
 
-        Vector2[] pattern = GeneratePattern();
+        StructurePattern pattern = GetRandomPattern();
 
-        foreach (Vector2 offset in pattern)
+        if (pattern == null) yield break;
+
+        foreach (var block in pattern.blocks)
         {
-            Vector2 buildPos = GetBuildPosition(offset);
+            if (!enabled) yield break;
 
-            TryPlace(buildPos);
+            Vector2 buildPos = GetBuildPosition(block.offset);
+            TryPlace(buildPos, block.blockType);
 
             yield return new WaitForSeconds(delay);
         }
@@ -78,92 +93,44 @@ public class AIBuilder : MonoBehaviour
     {
         switch (difficulty)
         {
-            case AIDifficulty.Easy: return baseDelay * 2f;
+            case AIDifficulty.Easy: return baseDelay;
             case AIDifficulty.Medium: return baseDelay;
-            case AIDifficulty.Hard: return baseDelay * 0.5f;
+            case AIDifficulty.Hard: return baseDelay;
         }
 
         return baseDelay;
     }
 
-    Vector2[] GeneratePattern()
+    StructurePattern GetRandomPattern()
     {
-        if (difficulty == AIDifficulty.Easy)
+        List<StructurePattern> list = null;
+
+        switch (difficulty)
         {
-            return GenerateVerticalWall(-1, 7);
+            case AIDifficulty.Easy:
+                list = patternData.easyPatterns;
+                break;
+
+            case AIDifficulty.Medium:
+                list = patternData.mediumPatterns;
+                break;
+
+            case AIDifficulty.Hard:
+                list = patternData.hardPatterns;
+                break;
         }
 
-        if (difficulty == AIDifficulty.Medium)
+        if (list == null || list.Count == 0)
         {
-            return GenerateDoubleWall(7);
+            Debug.LogWarning("No hay patrones para esta dificultad");
+            return null;
         }
 
-        return GenerateFullStructure(7);
+        return list[Random.Range(0, list.Count)];
     }
 
-    Vector2[] GenerateDoubleWall(int height)
+    void TryPlace(Vector2 position, BlockData blockType)
     {
-        Vector2[] pattern = new Vector2[height * 2];
-
-        for (int i = 0; i < height; i++)
-        {
-            // Left
-            pattern[i] = new Vector2(-1, i);
-
-            // Right
-            pattern[i + height] = new Vector2(1, i);
-        }
-
-        return pattern;
-    }
-
-    Vector2[] GenerateFullStructure(int height)
-    {
-        System.Collections.Generic.List<Vector2> pattern = new System.Collections.Generic.List<Vector2>();
-
-        for (int i = 0; i < height; i++)
-        {
-            pattern.Add(new Vector2(-1, i));
-            pattern.Add(new Vector2(1, i));
-        }
-
-        for (int x = -1; x <= 1; x++)
-        {
-            pattern.Add(new Vector2(x, height));
-        }
-
-        return pattern.ToArray();
-    }
-
-    Vector2[] GenerateVerticalWall(int xOffset, int height)
-    {
-        Vector2[] pattern = new Vector2[height];
-
-        for (int i = 0; i < height; i++)
-        {
-            pattern[i] = new Vector2(xOffset, i);
-        }
-
-        return pattern;
-    }
-
-    void TryPlace(Vector2 position)
-    {
-        if (placer.currentBlock == null) return;
-
-        int cost = placer.currentBlock.cost;
-
-        if (!CurrencyManager.Instance.CanAfford(cost))
-            return;
-
-        GameObject placed = Instantiate(placer.currentBlock.prefab, position, Quaternion.identity);
-
-        SpriteRenderer sr = placed.GetComponent<SpriteRenderer>();
-        if (sr != null)
-            sr.color = Color.white;
-
-        placed.layer = LayerMask.NameToLayer("Placement");
-
-        CurrencyManager.Instance.Spend(cost);
+        BuildSystem.Instance.TryPlaceBlock(blockType, position, Quaternion.identity, true);
     }
 }

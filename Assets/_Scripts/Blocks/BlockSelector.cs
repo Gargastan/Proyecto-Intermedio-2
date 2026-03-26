@@ -5,10 +5,11 @@ using TMPro;
 
 public class BlockSelector : MonoBehaviour
 {
+    [Header("References")]
     public BlockPlacer placer;
     public Transform buttonContainer;
     public Button blockButtonPrefab;
-    public LevelData levelData;
+    public BuilderData playerData;
 
     private List<Button> buttons = new List<Button>();
 
@@ -27,7 +28,7 @@ public class BlockSelector : MonoBehaviour
         buttons.Clear();
 
         // Crear un botón por cada BlockData disponible en el nivel
-        foreach (var block in levelData.availableBlocks)
+        foreach (var block in playerData.availableBlocks)
         {
             Button newButton = Instantiate(blockButtonPrefab, buttonContainer);
 

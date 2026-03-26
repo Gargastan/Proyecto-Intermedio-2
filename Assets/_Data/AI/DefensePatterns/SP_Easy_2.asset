@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93994706f7a36b40adecc70a0dd6ca0, type: 3}
+  m_Name: SP_Easy_2
+  m_EditorClassIdentifier: Assembly-CSharp::StructurePattern
+  blocks:
+  - offset: {x: -2, y: 0}
+    blockType: {fileID: 11400000, guid: 90005d6c86f08e341b426eb5545c263b, type: 2}
+  - offset: {x: -2, y: 1}
+    blockType: {fileID: 11400000, guid: 90005d6c86f08e341b426eb5545c263b, type: 2}
+  - offset: {x: -2, y: 2}
+    blockType: {fileID: 11400000, guid: 8861884213a2598499859cf97a06d331, type: 2}
+  - offset: {x: -2, y: 3}
+    blockType: {fileID: 11400000, guid: 90005d6c86f08e341b426eb5545c263b, type: 2}
+  - offset: {x: -2, y: 5}
+    blockType: {fileID: 11400000, guid: 8861884213a2598499859cf97a06d331, type: 2}

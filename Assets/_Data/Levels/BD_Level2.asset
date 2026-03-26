@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22f344cbc127690458ad6c1533b199c0, type: 3}
-  m_Name: LD_Level1
-  m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  levelName: Nivel 1
+  m_Script: {fileID: 11500000, guid: 0753ad9fa68bc8b4a913967b315e74e8, type: 3}
+  m_Name: BD_Level2
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBuildData
   availableBlocks:
   - {fileID: 11400000, guid: 90005d6c86f08e341b426eb5545c263b, type: 2}
-  - {fileID: 11400000, guid: 1a6213a2c136b5c458dfebf3acc1ecbb, type: 2}
   - {fileID: 11400000, guid: 8861884213a2598499859cf97a06d331, type: 2}
-  - {fileID: 11400000, guid: 80e9595427af5bb4d8c6b7ee82841d45, type: 2}
-  - {fileID: 11400000, guid: 8255b3bdf8ab8da49ad940bde192fd5f, type: 2}
+  - {fileID: 11400000, guid: 1a6213a2c136b5c458dfebf3acc1ecbb, type: 2}
