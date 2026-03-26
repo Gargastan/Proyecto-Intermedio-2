@@ -7,11 +7,13 @@ using UnityEditor;
 public class MainMenu : MonoBehaviour
 {
     ScreenFade fade;
-    [SerializeField] private AudioClip menuMusic,gameMusic;
+    [SerializeField] private AudioClip menuMusic;
     private string menuMusicName;
 
     private void Start()
     {
+        GameManager.IsCakeDestroyed = false;
+
         AudioManager.isMusicLoop = true;
         AudioManager.Instance.PlayMusic(menuMusic,0.3f);
         menuMusicName = menuMusic.name;
@@ -29,8 +31,7 @@ public class MainMenu : MonoBehaviour
         fade.FadeIn();
         yield return new WaitForSeconds(fade.fadeTime);
         AudioManager.Instance.StopSound(menuMusicName);
-        AudioManager.Instance.PlayMusic(gameMusic, 0.4f);
-        GameManager.Instance.gameStartState = gameStartState;
+        GameManager.gameStartState = gameStartState;
         SceneManager.LoadScene("Game Scene");
     }
 

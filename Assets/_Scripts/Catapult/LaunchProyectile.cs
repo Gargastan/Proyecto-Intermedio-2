@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.WSA;
+using UnityEngine.UI;
 
 public class LaunchProyectile : MonoBehaviour
 {
@@ -14,11 +14,33 @@ public class LaunchProyectile : MonoBehaviour
     [SerializeField]
     public AudioClip flySFX;
 
+    [SerializeField]
+    private Text remainingProyectilesText;
+    private int proyectiles;
+
     private bool canLaunch = false;
-    public static bool canThrowArm = true;
+    public static bool canThrowArm = false;
 
     public static event Action <GameObject> onProyectileLaunched;
-   
+
+  
+    private void OnEnable()
+    {
+        GameManager.onGameStart += Setup;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onGameStart -= Setup;
+    }
+
+    private void Setup(int gameState)
+    {
+        proyectiles = 3;
+        if (gameState != 0) return;
+        canThrowArm = true;
+    }
+
     public void FireProyectile()
     {
         if (canThrowArm)
@@ -42,6 +64,15 @@ public class LaunchProyectile : MonoBehaviour
         rb.AddForce(proyectileOrigin.transform.up * data.speed);
         onProyectileLaunched?.Invoke(newProjectile);
 
+        proyectiles--;
+        remainingProyectilesText.text = "x " + proyectiles;
+        if (proyectiles <= 0)
+        {
+            canThrowArm = false;
+            canLaunch = false;
+            StopAllCoroutines();
+            StartCoroutine(EndGame()); 
+        }
     }
 
     private IEnumerator RotateOverTime(Transform obj, Quaternion target, float duration)
@@ -69,8 +100,14 @@ public class LaunchProyectile : MonoBehaviour
             obj.rotation = Quaternion.Lerp(target, startRotation, t);
             yield return null;
         }
-
         obj.rotation = startRotation;
+
+    }
+
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(9f);
+        GameManager.IsOutOfProyectiles = true;
 
     }
 

@@ -8,7 +8,7 @@ public class ProyectileBehaviour : MonoBehaviour
     private bool canFall = false;
     private bool isTouching = false;
     private bool canSound = true;
-    //private bool isDiving = false;
+    private bool isGameOver = false;
 
     public ProyectileData proyectileData;
 
@@ -37,7 +37,11 @@ public class ProyectileBehaviour : MonoBehaviour
         collision.gameObject.TryGetComponent<BlockBehaviour>(out BlockBehaviour blockBehaviour);
         if (blockBehaviour != null)
         {
-            if(blockBehaviour.data.name == "BD_Cake") Destroy(blockBehaviour.gameObject);
+            if(blockBehaviour.data.name == "BD_Cake")
+            {
+                Destroy(blockBehaviour.gameObject);
+                StartCoroutine(GameOver());
+            }
         }
         
         isTouching = true;
@@ -55,6 +59,7 @@ public class ProyectileBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         AudioManager.Instance.PlayEffect(proyectileData.deathSFX);
+        if(isGameOver) GameManager.IsCakeDestroyed = true;
         Destroy(rb.gameObject);
         LaunchProyectile.canThrowArm = true;
     }
@@ -70,6 +75,13 @@ public class ProyectileBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(proyectileData.weightIncrementTimer);
         //isDiving = true;
+    }
+
+    private IEnumerator GameOver()
+    {
+        isGameOver = true;
+        yield return new WaitForSeconds(2f);
+        GameManager.IsCakeDestroyed = true;
     }
 
     void Update()

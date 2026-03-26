@@ -18,7 +18,7 @@ MonoBehaviour:
   deathSFX: {fileID: 8300000, guid: fb97d1bdc4543c648941817d3085bd1b, type: 3}
   SFXVolume: 0.8
   cost: 10
-  speed: 3000
+  speed: 2600
   speedAcceleration: 0
   angularSpeed: 10
   angularAcceleration: 0

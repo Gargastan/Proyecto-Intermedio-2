@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1480,7 +1480,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: VS AI - DUKE
+  m_Text: Defense  (WIP)
 --- !u!222 &725490297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1606,7 +1606,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   menuMusic: {fileID: 8300000, guid: b496ad1a3e3ba03409f6a993e6e70046, type: 3}
-  gameMusic: {fileID: 8300000, guid: 465ca96478c829545a01b93e682b6aaa, type: 3}
 --- !u!114 &837084749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3099,7 +3098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3119,7 +3118,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: VS AI - PRINCESS
+  m_Text: 1 v 1 (WIP)
 --- !u!222 &1535873299
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4112,7 +4111,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1 V 1
+  m_Text: Attack - Duke
 --- !u!222 &1841866515
 CanvasRenderer:
   m_ObjectHideFlags: 0

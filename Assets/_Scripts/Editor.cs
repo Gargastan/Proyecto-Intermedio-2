@@ -19,6 +19,7 @@ public class CameraEditorTools : MonoBehaviour
         }
     }
 }
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(CameraEditorTools))]
 public class CameraEditorToolsEditor : Editor
@@ -37,3 +38,4 @@ public class CameraEditorToolsEditor : Editor
         }
     }
 }
+#endif
